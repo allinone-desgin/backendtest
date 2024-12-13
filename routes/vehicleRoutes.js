@@ -2,7 +2,7 @@ const express = require("express");
 const Vehicle = require("../modules/Vehicle");
 const router = express.Router();
 
-router.post("/api/vehicles", async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, status } = req.body;
   try {
     const newVehicle = new Vehicle({ name, status });
@@ -14,7 +14,7 @@ router.post("/api/vehicles", async (req, res) => {
 });
 
 // Get All Vehicles
-router.get("/api/vehicles", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const vehicles = await Vehicle.find();
     res.status(200).json(vehicles);
@@ -24,7 +24,7 @@ router.get("/api/vehicles", async (req, res) => {
 });
 
 // Update Vehicle Status
-router.put("/api/vehicles/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { status } = req.body;
   try {
     const vehicle = await Vehicle.findByIdAndUpdate(
